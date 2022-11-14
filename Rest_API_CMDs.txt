@@ -1,0 +1,7 @@
+
+
+
+py .\RestClient.py -r .\Newton.config -c https://newton.now.sh/api/v2/derive/x%5E2
+
+
+
