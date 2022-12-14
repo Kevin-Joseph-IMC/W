@@ -1,0 +1,108 @@
+Python:
+------------------
+parser.add_argument
+------------------
+-url, metavar=URL, To request the REST API with the URL
+-hd, metavar=JSON, To include the header to the request
+-bd, metavar=JSON, To include the body to the request
+-q, metavar=RegEx, To query the text from the response with RegEx
+-enc, To encode the input with base64
+-u, metavar=JSON, To put the user authentication details to the request
+-lcf, metavar=filepath, To put the user authentication details to the request with the help of a file
+-rcf, metavar=filepath, To query the text from the response with RegEx with the help of a file
+-log, metavar=filepath, To store all necessary information from the script execution
+-m, metavar=REST API Method, To specify the Rest API method to send the request
+-ic, To ignore the SSL-certificate
+-pr, TO print the text from the response
+-v, To increase the details of the script execution
+
+Docx:
+
+-url <URL>
+	Rest-URL
+		Die URL ist absolut und sollte mit http(s) angeschrieben werden. Die URL wird verwendet, um eine REST-API direkt anzufragen. 
+-hd <JSON>
+	Header
+		Der Header ist ein JSON, das bei der HTTP-Anfrage gesetzt wird.
+-bd <JSON>
+	Body
+		Der Body ist ein JSON, das bei der HTTP-Anfrage gesetzt wird.
+-q <RegEx>
+	Query
+		Die Query ist ein RegEx, das verwendet wird, um den Text der HTTP-Antwort durchzusuchen.
+-enc
+	Encoder
+		Der Encoder verschlüsselt den Eingabetext mithilfe von Base64.
+-u <JSON>
+	User
+		Der User enthält den Usernamen und das Passwort, damit die HTTP-Anfrage authentifizert ankommt.
+-lcf <filepath>
+	LoginConfigFile
+		Die Datei beinhaltet zwei Methoden für die erfolgreiche Authentifizierung der HTTP-Anfrage. Die jeweils in der Doku beschrieben werden.
+-rcf <filepath>
+	RestConfigFile
+		Die Datei beinhaltet eine Liste von Bedingungen. Falls bestimmte Bedingungen erfüllt wurden, werden bestimmte Zahlen ausgegeben, die informieren, wie das Skript geendet hat. 
+-log <filepath>
+	Logging
+		Die Datei beinhaltet alle relevanten Informationen, die währrend der Durchführung des Skriptes entnommen wurden.
+-m <REST-API-Method>
+	Method
+		Die REST-API-Methode wird für die Aussendung der HTTP-Anfrage genutzt.
+-ic
+	Ignore-Certificate
+		Das SSL-Zertifikat wird ignoriert. Diese Variable ist standardgemäß auf "True" gesetzt.
+-pr
+	Print-Response
+		Die HTTP-Antwort wird im Textformat ausgegeben. Diese Variable ist standardgemäß auf "False" gesetzt.
+-v
+	Verbose
+		Die Verbose gibt die die Skriptausführung detailierter aus. Diese Variable ist standardgemäß auf 0 gesetzt.
+
+----------------------
+RestConfigFile - rcf
+----------------------
+Die REST-Config Datei wurde erstellt, um die Benutzereingaben und die daraus resultierenden Ergebnisse mit den REST-Bedingungen aus dieser Datei zu vergleichen, und danach den entsprechenden Integerwert auszugeben.  Der ausgebende Integerwert reicht von 0 bis 3. Diese Werte haben folgende Bedeutungen:
+•	0 – OK
+•	1 – Fehler, Error
+•	2 – Fehler, Error
+•	3 – Fehler, Error
+
+Aufbau
+Die Datei sollte nur aus vier REST-Bedingungen bestehen, die jeweils nur mit dem Semikolon getrennt sind. Jede Zeile ist in vier gespalten. Die vier Spaltenbezeichnungen sind URL, HttpReturnCode, BatchReturncode und Query. Ein Hashtag am Zeilenanfang konvertiert die gesamte Zeile zu einem Kommentar, und die nächste Zeile wird gelesen und die Aktuelle ignoriert.
+Die folgenden REST-Bedingungen haben bestimmte Bedeutungen:
+•	URL – der relevante oder absolute Pfad
+•	HttpReturnCode – die HTTP-Statuscode nach der Durchführung der HTTP-Anfrage 
+•	BatchReturnCode – der auszugebene Integerwert (0-3) nach der entsprechenden Überprüfung mit den restlichen REST-Bedingungen
+•	Query – die RegEx, die den Text von der HTTP-Antwort analysiert
+
+
+----------------------
+LoginConfigFile - lcf
+----------------------
+Die lcf-Datei wurde erstellt, um wichtige Zugangsdaten abzuspeichern. 
+Aufbau
+Die Datei besteht nur aus zwei Parametern: u & ud. Diese Parameter fangen mit einem Semikolon an. Danach werden die Zugangsdaten reihenweise gesetzt. Die Reihenfolge, wie diese Parameter gesetzt werden, ist bedeutend. Die Datei wird von oben nach unten gelesen. Ein Hashtag am Zeilenanfang konvertiert die gesamte Zeile zu einem Kommentar, und die nächste Zeile wird gelesen und die Aktuelle ignoriert.
+Die folgenden Parameter und Zugangsdaten haben bestimmte Bedeutungen:
+•	;u
+		 user: Es besteht aus dem Usernamen & Passwort. Die Reihenfolge ist wichtig, dass erstens User und zweitens Passwort gesetzt wird.
+		o	Username <Plain>
+		o	Passwort <Base64>
+•	;ud
+		userdatabase: Es besteht aus allen wichtigen Informationen, die zur Erstellung der erfolgreichen Datenbankverbindung, benötigt werden. Folgende Variablen sind wichtig oder optional anzugeben
+		o	DBDRIVER=	Datenbankdriver
+		o	DBHOST=	Datenbankhost
+		o	DBNAME=	Datenbankname
+		o	DBUSER=	Datenbankuser
+		o	DBPASS=	Datenbankpasswort
+		o	DBTABLE=	Datenbanktabelle
+		o	COLUSER=	Spaltenname, mit Bezug auf den Usernamen
+		o	COLPASS=	Spaltenname, mit Bezug auf das Passwort
+		o	COLHOST=	[Optional] Spaltenname, mit Bezug auf den Hostnamen
+		o	DBWHERE=	[Optional] SQL-String nach dem WHERE, um eine bestimmte Reihe zu bekommen
+
+
+
+
+
+
+
